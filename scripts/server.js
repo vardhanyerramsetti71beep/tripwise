@@ -1,12 +1,12 @@
 // Minimal static file server with security headers. No dependencies.
-// Usage: node server.js  (PORT env var, default 8080)
+// Usage: npm start  (node scripts/server.js)  (PORT env var, default 8080)
 
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)));
+const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 
 const MIME = Object.freeze({
   '.html': 'text/html; charset=utf-8',

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { after, before, describe, it } from 'node:test';
 import { createPlan } from '../src/engine/index.js';
-import { createApp, resolveSafePath } from '../server.js';
+import { createApp, resolveSafePath } from '../scripts/server.js';
 import { basePrefs } from './helpers.js';
 
 const offline = async () => {
@@ -52,7 +52,7 @@ describe('static server', () => {
   });
 
   it('blocks non-public files and traversal', async () => {
-    for (const path of ['/package.json', '/tests/helpers.js', '/server.js', '/%2e%2e/secret.js', '/.git/config']) {
+    for (const path of ['/package.json', '/tests/helpers.js', '/scripts/server.js', '/%2e%2e/secret.js', '/.git/config']) {
       assert.equal((await fetch(`${base}${path}`)).status, 404, path);
     }
   });
@@ -63,7 +63,7 @@ describe('static server', () => {
 
   it('resolveSafePath rejects malformed and hidden paths', () => {
     assert.equal(resolveSafePath('/%E0%A4%A'), null);
-    assert.equal(resolveSafePath('/src/../server.js'), null);
+    assert.equal(resolveSafePath('/src/../package.json'), null);
     assert.equal(resolveSafePath('/src/.env.js'), null);
     assert.ok(resolveSafePath('/styles.css'));
   });
