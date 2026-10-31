@@ -51,7 +51,8 @@ form input ─▶ validate ─▶ weather (forecast or climate) ─▶ score att
 ```
 index.html            UI markup (semantic, accessible form and results region)
 styles.css            Responsive styles, light/dark themes, print styles
-server.js             Zero-dependency static server with security headers
+vercel.json           Static hosting config and security headers for Vercel
+scripts/server.js     Local zero-dependency static server with security headers
 src/data/             Curated destinations (5 cities, 55 attractions, climate data)
 src/engine/           Pure, framework-free decision logic (fully unit tested)
 src/ui/app.js         DOM rendering and form handling
