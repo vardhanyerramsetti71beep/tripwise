@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.open-meteo.com; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="description" content="TripWise is a smart travel assistant that plans day-by-day itineraries around your interests, budget, group and the weather." />
+    <title>TripWise Travel Assistant</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <p class="brand"><span aria-hidden="true">🧭</span> TripWise</p>
+        <p class="tagline">A travel plan that adapts to your interests, budget, group and the weather.</p>
+      </div>
+    </header>
+
+    <main id="main" class="wrap layout">
+      <section class="panel" aria-labelledby="form-title">
+        <h1 id="form-title">Plan your trip</h1>
+        <form id="trip-form" novalidate>
+          <div class="field">
+            <label for="destination">Destination</label>
+            <select id="destination" name="destination" required aria-describedby="destination-error"></select>
+            <p class="error" id="destination-error" role="alert"></p>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="startDate">Start date</label>
+              <input id="startDate" name="startDate" type="date" required aria-describedby="startDate-error" />
+              <p class="error" id="startDate-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="days">Days</label>
+              <input id="days" name="days" type="number" min="1" max="14" value="3" required inputmode="numeric" aria-describedby="days-error" />
+              <p class="error" id="days-error" role="alert"></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="travellers">Travellers</label>
+              <input id="travellers" name="travellers" type="number" min="1" max="12" value="2" required inputmode="numeric" aria-describedby="travellers-error" />
+              <p class="error" id="travellers-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="group">Who's going</label>
+              <select id="group" name="group" aria-describedby="group-error">
+                <option value="solo">Solo</option>
+                <option value="couple" selected>Couple</option>
+                <option value="family">Family with kids</option>
+                <option value="friends">Friends</option>
+              </select>
+              <p class="error" id="group-error" role="alert"></p>
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>Travel style</legend>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="budgetLevel" value="budget" /> Budget</label>
+              <label class="chip"><input type="radio" name="budgetLevel" value="moderate" checked /> Moderate</label>
+              <label class="chip"><input type="radio" name="budgetLevel" value="luxury" /> Luxury</label>
+            </div>
+            <p class="error" id="budgetLevel-error" role="alert"></p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Pace</legend>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="pace" value="relaxed" /> Relaxed</label>
+              <label class="chip"><input type="radio" name="pace" value="balanced" checked /> Balanced</label>
+              <label class="chip"><input type="radio" name="pace" value="packed" /> Packed</label>
+            </div>
+            <p class="error" id="pace-error" role="alert"></p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Interests <span class="hint">(pick any)</span></legend>
+            <div class="choices" id="interests"></div>
+            <p class="error" id="interests-error" role="alert"></p>
+          </fieldset>
+
+          <div class="field">
+            <label for="budgetUSD">Total budget in USD <span class="hint">(optional, excluding flights)</span></label>
+            <input id="budgetUSD" name="budgetUSD" type="number" min="0" step="50" inputmode="numeric" placeholder="e.g. 1500" aria-describedby="budgetUSD-error" />
+            <p class="error" id="budgetUSD-error" role="alert"></p>
+          </div>
+
+          <div class="field check">
+            <input id="accessibleOnly" name="accessibleOnly" type="checkbox" />
+            <label for="accessibleOnly">Step-free / wheelchair-friendly places only</label>
+          </div>
+
+          <button type="submit" class="primary" id="submit-btn">Build my plan</button>
+        </form>
+      </section>
+
+      <section class="results" id="results" aria-labelledby="results-title" aria-live="polite" aria-busy="false">
+        <h2 id="results-title" tabindex="-1">Your plan</h2>
+        <p class="empty">Fill in your trip details and choose <strong>Build my plan</strong>. TripWise checks the forecast and builds a day-by-day itinerary.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Weather from <a href="https://open-meteo.com/" rel="noopener noreferrer">Open-Meteo</a>. Costs are estimates in USD and exclude flights.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="src/ui/app.js"></script>
+  </body>
+</html>

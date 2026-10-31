@@ -1,0 +1,15 @@
+{
+  "name": "tripwise-travel-assistant",
+  "version": "1.0.0",
+  "description": "Smart travel assistant that builds weather-aware, budget-aware, accessible day-by-day itineraries.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
